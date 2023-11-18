@@ -1,0 +1,47 @@
+root: true
+env:
+  browser: true
+  es2021: true
+  node: true
+extends:
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:@typescript-eslint/stylistic"
+  - "next/core-web-vitals"
+  - "plugin:@next/next/recommended"
+  - "plugin:react-hooks/recommended"
+  - "plugin:react/recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:sonarjs/recommended"
+  - "prettier"
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 12
+  sourceType: "module"
+  project:
+    - "./tsconfig.json"
+parser: "@typescript-eslint/parser"
+plugins:
+  - "react"
+  - "@typescript-eslint"
+  - "react-hooks"
+rules:
+  "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+  "@typescript-eslint/no-explicit-any": "off"
+  "@typescript-eslint/no-non-null-assertion": "off"
+  "no-useless-constructor": "off"
+  "no-use-before-define": "off"
+  "sort-imports": "off"
+  "react/react-in-jsx-scope": "off"
+  "@typescript-eslint/no-unused-vars": "off"
+  "react/prop-types": "off"
+  "react-hooks/rules-of-hooks": "error"
+  "react-hooks/exhaustive-deps":
+    - "warn"
+    - additionalHooks: "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
+  "sonarjs/cognitive-complexity": ["error", 30]
+settings:
+  react:
+    version: "detect"
