@@ -41,6 +41,7 @@ export async function POST(request: Request) {
       userId,
       id: base64CredentialID,
       publicKey: base64PublicKey,
+      transports: response.response.transports,
     };
     const jsonUserData = JSON.stringify({ [base64CredentialID]: userData });
     const dirPath = path.join(process.cwd(), "db");
@@ -50,7 +51,6 @@ export async function POST(request: Request) {
     }
     fs.writeFileSync(filePath, jsonUserData);
 
-    // 検証結果をJSONとして返します
     return NextResponse.json({ success: verified });
   } catch (e) {
     console.error("パスキーの登録に失敗しました", e);
