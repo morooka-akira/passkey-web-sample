@@ -63,6 +63,7 @@ async function authentication() {
 export default function Page() {
   useEffect(() => {
     if (window.PublicKeyCredential) {
+      // 画面読み込み時にパスキー情報取得のAPIを呼び出しておく
       authentication();
     }
   }, []);
