@@ -22,7 +22,6 @@ export async function POST(request: Request) {
     }
     const fileContents = fs.readFileSync(filePath, "utf8");
     const users = JSON.parse(fileContents);
-    console.log(users);
 
     // response.id に一致する credential を検索
     const user = users[response.id];
@@ -33,22 +32,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false });
     }
 
-    const { verified, authenticationInfo } = await verifyAuthenticationResponse(
-      {
-        response,
-        expectedChallenge: challenge,
-        expectedOrigin: origin,
-        expectedRPID: "localhost",
-        requireUserVerification: false,
-        authenticator: {
-          counter: user.counter,
-          credentialPublicKey: isoBase64URL.toBuffer(user.publicKey),
-          credentialID: isoBase64URL.toBuffer(user.id),
-          transports: user.transports,
-        },
-      }
-    );
-    console.log(verified, authenticationInfo);
+    const { verified } = await verifyAuthenticationResponse({
+      response,
+      expectedChallenge: challenge,
+      expectedOrigin: origin,
+      expectedRPID: "localhost",
+      requireUserVerification: false,
+      authenticator: {
+        counter: user.counter,
+        credentialPublicKey: isoBase64URL.toBuffer(user.publicKey),
+        credentialID: isoBase64URL.toBuffer(user.id),
+        transports: user.transports,
+      },
+    });
 
     return NextResponse.json({ success: verified });
   } catch (e) {
