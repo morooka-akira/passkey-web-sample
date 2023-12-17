@@ -1,5 +1,4 @@
 import { generateRegistrationOptions } from "@simplewebauthn/server";
-import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
